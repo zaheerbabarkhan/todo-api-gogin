@@ -8,7 +8,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/zaheerbabarkhan/todo-api-gogin/database"
+	"github.com/zaheerbabarkhan/todo-api-gogin/modules/user"
 )
+
+func setUpRoutes(r *gin.Engine) {
+	user.SetUpRoutes(r)
+}
 
 func main() {
 	router := gin.Default()
@@ -20,6 +25,9 @@ func main() {
 	}
 
 	database.ConnectDatabase()
+	database.MigrateModels(database.Db)
+
+	setUpRoutes(router)
 
 	router.GET("status", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
