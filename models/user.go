@@ -13,11 +13,11 @@ type User struct {
 	LastName    string    `gorm:"size:20;not null;coulmn:last_name" json:"lastName"`
 	Email       string    `gorm:"size:250;not null;column:email;uniqueIndex" json:"email"`
 	AccountType string    `gorm:"size:10;not null;column:account_type" json:"accountType"`
-	Password    string    `gorm:"size:20;coulmn:password" json:"password"`
+	Password    string    `gorm:"coulmn:password" json:"password"`
 	StatusId    int8      `gorm:"type:smallint;column:status_id;not null" json:"statusId"`
 }
 
-func (user *User) BeforeCreate(tx *gorm.DB) {
+func (user *User) BeforeCreate(tx *gorm.DB) error {
 	user.ID = uuid.New()
 
 	if user.StatusId == 0 && user.AccountType == types.AccountTypes.APP {
@@ -27,5 +27,5 @@ func (user *User) BeforeCreate(tx *gorm.DB) {
 	if user.StatusId == 0 && user.AccountType == types.AccountTypes.SOCIAL {
 		user.StatusId = int8(constants.Status.ACTIVE)
 	}
-	return
+	return nil
 }

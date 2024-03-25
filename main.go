@@ -29,7 +29,7 @@ func main() {
 
 	setUpRoutes(router)
 
-	router.GET("status", func(ctx *gin.Context) {
+	router.GET("status-check", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
 			"status": "ok",
 		})
