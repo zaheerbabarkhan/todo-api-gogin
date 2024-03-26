@@ -23,26 +23,6 @@ func sendMail(mailData types.SendMailReq) error {
 		return err
 	}
 	return nil
-
-	// auth := smtp.PlainAuth("", "sbabar950@gmail.com", os.Getenv("SMTP_PASSWORD"), os.Getenv("SMTP_HOST"))
-
-	// to := []string{mailData.To}
-
-	// msg := []byte("To: " + mailData.To +
-
-	// 	"Subject: Why aren’t you using Mailtrap yet?\r\n" +
-
-	// 	"\r\n" +
-
-	// 	"Here’s the space for our great sales pitch\r\n")
-
-	// err := smtp.SendMail(os.Getenv("SMTP_HOST")+":"+fmt.Sprint(587), auth, "sbabar950@gmail.com", to, msg)
-
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	return err
-	// }
-	// return nil
 }
 
 func SendConfirmationEmail(to string, token string) error {
