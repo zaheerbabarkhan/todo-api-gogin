@@ -29,3 +29,7 @@ func (user *User) BeforeCreate(tx *gorm.DB) error {
 	}
 	return nil
 }
+
+func (User) DefaultScope(db *gorm.DB) *gorm.DB {
+	return db.Where("status_id != ?", constants.Status.DELETED)
+}
