@@ -14,4 +14,11 @@ func MigrateModels(Db *gorm.DB) {
 		fmt.Println(err)
 		panic("Unable to migrate user model")
 	}
+
+	err = Db.AutoMigrate(&models.Todo{})
+
+	if err != nil {
+		fmt.Println(err)
+		panic("Unable to migrate todo model")
+	}
 }
