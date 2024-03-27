@@ -8,11 +8,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/zaheerbabarkhan/todo-api-gogin/database"
+	"github.com/zaheerbabarkhan/todo-api-gogin/modules/todo"
 	"github.com/zaheerbabarkhan/todo-api-gogin/modules/user"
 )
 
 func setUpRoutes(r *gin.Engine) {
 	user.SetUpRoutes(r)
+	todo.SetUpRoutes(r)
 }
 
 func main() {

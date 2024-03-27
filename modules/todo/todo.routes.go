@@ -1,9 +1,12 @@
 package todo
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/zaheerbabarkhan/todo-api-gogin/middleware"
+)
 
 func SetUpRoutes(r *gin.Engine) {
-	userRouter := r.Group("/todos")
-
-	userRouter.POST("", CreateTodoHandler)
+	todoRouter := r.Group("/todos")
+	todoRouter.Use(middleware.AuthRequired)
+	todoRouter.POST("", CreateTodoHandler)
 }
