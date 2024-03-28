@@ -19,6 +19,7 @@ func setUpRoutes(r *gin.Engine) {
 
 func main() {
 	router := gin.Default()
+	router.MaxMultipartMemory = 8 << 20
 
 	err := godotenv.Load()
 	if err != nil {
