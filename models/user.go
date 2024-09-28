@@ -1,6 +1,8 @@
 package models
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/zaheerbabarkhan/todo-api-gogin/constants"
 	"github.com/zaheerbabarkhan/todo-api-gogin/types"
@@ -15,6 +17,8 @@ type User struct {
 	AccountType string    `gorm:"size:10;not null;column:account_type" json:"accountType"`
 	Password    string    `gorm:"coulmn:password" json:"password"`
 	StatusId    int8      `gorm:"type:smallint;column:status_id;not null" json:"statusId"`
+	CreatedAt   time.Time `gorm:"not null" json:"createdAt"`
+	UpdatedAt   time.Time `gorm:"not null" json:"updatedAt"`
 }
 
 func (user *User) BeforeCreate(tx *gorm.DB) error {
@@ -27,6 +31,12 @@ func (user *User) BeforeCreate(tx *gorm.DB) error {
 	if user.StatusId == 0 && user.AccountType == types.AccountTypes.SOCIAL {
 		user.StatusId = int8(constants.Status.ACTIVE)
 	}
+	user.CreatedAt = time.Now()
+	return nil
+}
+
+func (user *User) BeforeUpdate(tx *gorm.DB) (err error) {
+	user.UpdatedAt = time.Now()
 	return nil
 }
 
